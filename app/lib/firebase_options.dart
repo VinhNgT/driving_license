@@ -59,4 +59,5 @@ class DefaultFirebaseOptions {
     projectId: 'driving-license-1d576',
     storageBucket: 'driving-license-1d576.firebasestorage.app',
   );
+
 }

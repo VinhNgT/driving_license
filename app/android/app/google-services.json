@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:582386530469:android:c3251b82472700dbd3f54c",
+        "mobilesdk_app_id": "1:582386530469:android:186809ce4e1b25acd3f54c",
         "android_client_info": {
-          "package_name": "com.example.driving_license"
+          "package_name": "com.vikapps.driving_license"
         }
       },
       "oauth_client": [],

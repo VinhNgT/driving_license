@@ -7,7 +7,8 @@ enum AdUnit {
     type: BannerAd,
   ),
   createNewExam(
-    id: 'ca-app-pub-8207177478479841/5336104383',
+    // id: 'ca-app-pub-8207177478479841/5336104383',
+    id: 'ca-app-pub-3940256099942544/5224354917', // Test
     type: RewardedAd,
   );
 

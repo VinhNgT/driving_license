@@ -25,6 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <!-- Disable Impeller -->
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false" />
         <!-- Admob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

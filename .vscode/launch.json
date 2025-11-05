@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "driving_license",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "app",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "driving_license (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "cwd": "app",
+      "program": "lib/main.dart"
+    },
+    {
+      "name": "driving_license (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "cwd": "app",
+      "program": "lib/main.dart"
+    }
+  ]
+}

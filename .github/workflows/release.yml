@@ -1,0 +1,96 @@
+name: Build and release
+run-name: Build and release ${{ github.ref_name }}
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          # Extract version from git tag (e.g., v1.2.3 -> 1.2.3)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=${GITHUB_REF#refs/tags/}" >> "$GITHUB_OUTPUT"
+          echo "Release version: $VERSION"
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ vars.JAVA_VERSION }}
+          # cache: gradle
+          # cache-dependency-path: |
+          #   app/android/**/*.gradle*
+          #   app/android/**/gradle-wrapper.properties
+
+      - name: Read Flutter version from .fvmrc
+        id: fvmrc
+        run: |
+          FLUTTER_VERSION=$(jq -r '.flutter' .fvmrc)
+          echo "flutter_version=$FLUTTER_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvmrc.outputs.flutter_version }}
+          channel: 'stable'
+          # cache: true
+
+      - name: Disable Flutter analytics
+        working-directory: ./app
+        run: |
+          flutter config --no-analytics || true
+
+      - name: Install required tools
+        run: |
+          # Install yq for YAML processing
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Extract secrets
+        env:
+          SECRETS_PASSPHRASE: ${{ secrets.SECRETS_PASSPHRASE }}
+        run: |
+          if [[ -z "$SECRETS_PASSPHRASE" ]]; then
+            echo "ERROR: SECRETS_PASSPHRASE secret is not set" >&2
+            echo "Please add the secrets passphrase to repository secrets" >&2
+            exit 1
+          fi
+
+          chmod +x ./scripts/ci_secrets.sh
+          ./scripts/ci_secrets.sh decrypt
+
+      - name: Build Android app
+        run: |
+          chmod +x ./scripts/build_app.sh
+          ./scripts/build_app.sh
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.version.outputs.tag }}
+          prerelease: ${{ contains(steps.version.outputs.tag, '-') }} # (v1.0.0-beta)
+          draft: ${{ vars.CREATE_DRAFT_RELEASE == 'true' }}
+          files: |
+            build_artifacts/android_build_artifacts.tar.gz
+            build_artifacts/android/app-release.apk
+          fail_on_unmatched_files: true
+          preserve_order: true

@@ -1,0 +1,7 @@
+[project]
+name = "driving-license"
+version = "0.1.0"
+requires-python = ">=3.13.7"
+dependencies = [
+    "argon2-cffi>=25.1.0",
+]

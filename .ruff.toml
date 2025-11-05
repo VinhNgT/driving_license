@@ -1,0 +1,3 @@
+# Ruff configuration file.
+
+line-length = 80

@@ -1,0 +1,21 @@
+{
+  "Debug Print": {
+    "scope": "dart",
+    "prefix": "dp",
+    // prettier-ignore
+    "body": [
+      "debugPrint('$0');",
+    ],
+    "description": "Log output to console"
+  },
+
+  "Gap": {
+    "scope": "dart",
+    "prefix": "gap",
+    // prettier-ignore
+    "body": [
+      "const Gap($0),"
+    ],
+    "description": "Add a gap"
+  }
+}

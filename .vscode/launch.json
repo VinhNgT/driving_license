@@ -9,7 +9,8 @@
       "request": "launch",
       "type": "dart",
       "cwd": "app",
-      "program": "lib/main.dart"
+      "program": "lib/main.dart",
+      "args": ["--dart-define-from-file", "../envs/.env.development"]
     },
     {
       "name": "driving_license (profile mode)",
@@ -17,7 +18,8 @@
       "type": "dart",
       "flutterMode": "profile",
       "cwd": "app",
-      "program": "lib/main.dart"
+      "program": "lib/main.dart",
+      "args": ["--dart-define-from-file", "../envs/.env.development"]
     },
     {
       "name": "driving_license (release mode)",
@@ -25,7 +27,8 @@
       "type": "dart",
       "flutterMode": "release",
       "cwd": "app",
-      "program": "lib/main.dart"
+      "program": "lib/main.dart",
+      "args": ["--dart-define-from-file", "../envs/.env.development"]
     }
   ]
 }

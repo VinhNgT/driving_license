@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582386530469",
+    "project_id": "driving-license-1d576",
+    "storage_bucket": "driving-license-1d576.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582386530469:android:c3251b82472700dbd3f54c",
+        "android_client_info": {
+          "package_name": "com.example.driving_license"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-E9KxiCB_zlKGvLKrPjSnwYv8-PGpbBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,9 +9,6 @@ class FastPageViewScrollPhysics extends ScrollPhysics {
   }
 
   @override
-  SpringDescription get spring => const SpringDescription(
-        mass: 80,
-        stiffness: 100,
-        damping: 1,
-      );
+  SpringDescription get spring =>
+      const SpringDescription(mass: 1, stiffness: 1600, damping: 80);
 }

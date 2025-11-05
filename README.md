@@ -1,66 +1,72 @@
-## Repository Setup
+![Feature Graphic](resources/featureGraphic.png)
 
-### Prerequisites
+# Drive Ready
 
-- Git and Bash (Git Bash on Windows is fine)
-- Flutter via FVM
-- uv (Python package/devenv manager)
+Ứng dụng di động giúp người dùng ôn tập kiến thức lý thuyết để chuẩn bị cho kỳ thi giấy phép lái xe hạng A và B. Cung cấp các câu hỏi trắc nghiệm và tài liệu học để người dùng có thể nắm vững kiến thức cần thiết.
 
-Install if needed:
+## Thiết lập repository
+
+### Công cụ cần thiết
+
+- Git và Bash (sử dụng Cygwin trên Windows cũng được)
+- Flutter thông qua FVM
+- uv (trình quản lý gói/môi trường Python)
+
+Cài đặt nếu cần:
 
 - FVM: https://fvm.app/documentation/getting-started/installation
 - uv: https://docs.astral.sh/uv/getting-started/installation/
 
 ### 1) Bootstrap
 
-From the repo root, run the bootstrap helper script:
+Từ thư mục gốc của repo, chạy script bootstrap:
 
 ```bash
 ./bootstrap.sh
 ```
 
-After you run the bootstrap and restart VS Code, the IDE automatically uses the pinned Flutter/Dart from FVM and the Python virtualenv managed by uv.
+Sau khi chạy bootstrap và khởi động lại VS Code, IDE sẽ tự động sử dụng Flutter/Dart được cố định bởi FVM và môi trường ảo Python do uv quản lý.
 
-- Inside the VS Code terminal, just run plain commands:
+- Trong terminal của VS Code, chỉ cần chạy các lệnh thông thường:
 
-  - `flutter ...`, `dart ...` (no `fvm` prefix needed)
-  - `python ...` (no `uv run` needed)
+  - `flutter ...`, `dart ...` (không cần tiền tố `fvm`)
+  - `python ...` (không cần `uv run`)
 
-- Outside VS Code (or if PATH/env differs):
-  - Use `fvm flutter ...` / `fvm dart ...` to ensure the pinned SDK.
-  - Activate the venv or use `uv run python ...` for Python.
+- Bên ngoài VS Code (hoặc khi PATH/môi trường khác nhau):
+  - Sử dụng `fvm flutter ...` / `fvm dart ...` để đảm bảo dùng đúng SDK.
+  - Kích hoạt môi trường ảo hoặc dùng `uv run python ...` cho Python.
 
-### 2) Get Flutter dependencies
+### 2) Cài đặt Flutter dependencies
 
 ```bash
 cd app
 flutter pub get
 ```
 
-### 3) Run codegen (recommended during development)
+### 3) Chạy codegen (khuyến nghị trong quá trình phát triển)
 
-Use the VS Code task "build_runner_watch" or run:
+Sử dụng tác vụ VS Code "build_runner_watch" hoặc chạy:
 
 ```bash
 cd app
 dart run build_runner watch --delete-conflicting-outputs
 ```
 
-### 4) Launch the app
+### 4) Khởi chạy ứng dụng
 
-In another terminal:
+Ở một terminal khác:
 
 ```bash
 cd app
 flutter run
 ```
 
-## Helper folder `scripts/`
+## Thư mục hỗ trợ `scripts/`
 
-Contains utility scripts that automate local dev tasks and CI/CD workflows.
+Chứa các script tiện ích hỗ trợ tự động hóa tác vụ phát triển cục bộ và quy trình CI/CD.
 
-### Scripting conventions
+### Quy ước viết script
 
-- You must write scripts in Bash and/or Python.
-- Run from repo root unless the script says otherwise.
-- Scripts should be designed to be safe to re-run.
+- Bạn phải viết script bằng Bash hoặc Python.
+- Chạy từ thư mục gốc của kho trừ khi script có yêu cầu khác.
+- Script nên được thiết kế để có thể chạy lại nhiều lần một cách an toàn.

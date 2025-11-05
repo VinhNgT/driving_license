@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.0+44 - 2025-11-05
 ### Changed
 - Migrate to Flutter 3.35.7
 

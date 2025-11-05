@@ -8,6 +8,7 @@ import 'package:driving_license/utils/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -110,6 +111,19 @@ class ChapterDropdown extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notEmptyChapters = ref.watch(notEmptyChaptersProvider);
 
+    // Simulate the contentPadding resolution from InputDecorator
+    final contentPadding = context.theme.inputDecorationTheme.contentPadding!
+        .resolve(Directionality.of(context));
+
+    // Simulate the inputGap gapPadding calculation from InputDecorator
+    final gapPadding = switch (context.theme.inputDecorationTheme.border) {
+      OutlineInputBorder(:final gapPadding) => gapPadding,
+      InputBorder(:final isOutline)
+          when isOutline || context.theme.inputDecorationTheme.filled =>
+        4.0,
+      _ => 0.0,
+    };
+
     return AsyncValueWidget(
       value: notEmptyChapters,
       builder: (notEmptyChaptersValue) => FormBuilder(
@@ -120,13 +134,36 @@ class ChapterDropdown extends HookConsumerWidget {
             name: 'chapter_to_delete',
             dropdownColor: context.materialScheme.surfaceContainerHighest,
             autovalidateMode: AutovalidateMode.onUserInteraction,
-            decoration: const InputDecoration(
-              hintText: 'Chọn chương',
-              suffixIcon: Icon(
-                Symbols.expand_more,
-              ),
+            decoration: InputDecoration(
+              border: OutlineInputBorder(gapPadding: 0),
+              contentPadding: EdgeInsets.zero,
+              // hintText: 'Chọn chương',
+              // suffixIcon: Icon(Symbols.expand_more),
             ),
-            icon: const SizedBox.shrink(),
+            padding: EdgeInsets.only(
+              left: contentPadding.left + gapPadding,
+              top: contentPadding.top,
+              bottom: contentPadding.bottom,
+            ),
+            hint: Text(
+              'Chọn chương',
+              style: context.theme.inputDecorationTheme.hintStyle,
+            ),
+            icon: Row(
+              children: [
+                const Gap(4), // simulate _RenderDecoration inputToSuffixGap
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minWidth: kMinInteractiveDimension,
+                    minHeight: kMinInteractiveDimension,
+                  ),
+                  child: Icon(
+                    Symbols.expand_more,
+                    opticalSize: context.theme.iconTheme.opticalSize,
+                  ),
+                ),
+              ],
+            ),
             items: [
               const DropdownMenuItem(
                 value: AllChapterSelection(),

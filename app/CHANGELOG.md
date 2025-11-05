@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.1+45 - 2025-11-05
 ### Changed
 - Enable remote config
 

@@ -13,9 +13,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class ClearChapterCompletionDialog extends HookConsumerWidget {
-  const ClearChapterCompletionDialog({
-    super.key,
-  });
+  const ClearChapterCompletionDialog({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,13 +32,12 @@ class ClearChapterCompletionDialog extends HookConsumerWidget {
               ),
               children: const [
                 TextSpan(
-                  text: 'Dữ liệu hoàn thành của tất cả các câu hỏi thuộc '
+                  text:
+                      'Dữ liệu hoàn thành của tất cả các câu hỏi thuộc '
                       'chương được chọn sẽ bị xoá, bao gồm danh sách các câu '
                       'bạn đã làm sai.',
                 ),
-                TextSpan(
-                  text: '\n\n',
-                ),
+                TextSpan(text: '\n\n'),
                 TextSpan(
                   text: 'Danh sách các câu hỏi đã lưu sẽ không bị ảnh hưởng.',
                 ),
@@ -65,8 +62,9 @@ class ClearChapterCompletionDialog extends HookConsumerWidget {
           ),
           onPressed: () async {
             if (formKey.currentState!.saveAndValidate()) {
-              final selected = formKey.currentState!.value['chapter_to_delete']
-                  as ChapterDropdownSelectionData;
+              final selected =
+                  formKey.currentState!.value['chapter_to_delete']
+                      as ChapterDropdownSelectionData;
 
               _deleteUserAnswersHandler(ref, selected);
               Navigator.of(context).pop();
@@ -95,10 +93,7 @@ class ClearChapterCompletionDialog extends HookConsumerWidget {
         );
 
       case ChapterSelection(:final chapter):
-        userAnswersRepository.clearAllAnswers(
-          license,
-          chapter: chapter,
-        );
+        userAnswersRepository.clearAllAnswers(license, chapter: chapter);
     }
   }
 }

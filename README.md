@@ -8,7 +8,7 @@
 
 ### Công cụ cần thiết
 
-- Git và Bash (sử dụng Cygwin trên Windows cũng được)
+- Git và Bash (Cygwin trên Windows)
 - Flutter thông qua FVM
 - uv (trình quản lý gói/môi trường Python)
 
@@ -68,5 +68,5 @@ Chứa các script tiện ích hỗ trợ tự động hóa tác vụ phát tri�
 ### Quy ước viết script
 
 - Bạn phải viết script bằng Bash hoặc Python.
-- Chạy từ thư mục gốc của kho trừ khi script có yêu cầu khác.
+- Chạy từ thư mục gốc của repo trừ khi script có yêu cầu khác.
 - Script nên được thiết kế để có thể chạy lại nhiều lần một cách an toàn.

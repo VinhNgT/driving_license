@@ -1,4 +1,4 @@
-## Unreleased
+## 1.7.2+46 - 2025-11-06
 ### Fixed
 - Fix CI build doesn't include dev env parameters
 

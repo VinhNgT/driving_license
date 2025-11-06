@@ -81,7 +81,8 @@ flutter_build() {
 		$flutter_cmd build $build_target \
 			--obfuscate \
 			--split-debug-info="$output_dir/symbols" \
-			--extra-gen-snapshot-options=--save-obfuscation-map="$output_dir/map.json"
+			--extra-gen-snapshot-options=--save-obfuscation-map="$output_dir/map.json" \
+			--dart-define-from-file="../envs/.env.development"
 	)
 }
 
